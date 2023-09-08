@@ -2,21 +2,21 @@ import sys, os
 import threading
 from time import sleep
 from datetime import datetime, timedelta
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..', 'src')))
+from google_calendar import lectioToCalendar
 
-from src.calendar import lectioToCalendar
 
 sync_weeks_ahead = 4 # Will update schedule x weeks ahead of today
 current_week_sync_interval = 5.0 # Minutes between updating calendar for this week
 future_week_sync_interval = 15.0 # Minutes between updating calendar future weeks
 
 # Lectio login credentials
-user_name = ""
-password = ""
-school_id = "" # In the URL when you visit Lectio
+user_name = "matt1894"
+password = "MulerneMoel0102"
+school_id = "143" # In the URL when you visit Lectio
 
 # Which Google calendar to use
-calendar_id = 'primary'
+calendar_id = 'fdq48gi0ao2hn7udbmhg720pgo@group.calendar.google.com'
 
 def updateCurrentWeek():
     ltc = lectioToCalendar(user_name, password, school_id, calendar_id)
