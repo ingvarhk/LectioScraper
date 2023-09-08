@@ -19,14 +19,11 @@ class lectioToCalendar:
         self.password = psw
         self.school_id = schl_id
         try:
-            print(str(self.server_dir))
             # full_path = os.path.dirname(__file__) 
-            print('FUUsd')
             try:
                 f = open(str(self.server_dir) + '/abbreviations.json')
             except:
                 print("Could not open file 'abbreviations.json'")
-            print(f)
             self.codes = json.load(f)
         except:
             print("File 'abbreviations.json' not found.")
