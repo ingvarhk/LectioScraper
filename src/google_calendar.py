@@ -1,6 +1,7 @@
 import os, sys
 import datetime
 import json
+from pathlib import Path
 
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
@@ -12,18 +13,27 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__))))
 from lectio import Lectio
 
 class lectioToCalendar:
+    server_dir = Path(os.path.dirname(__file__)).parents[0] / 'server'
     def __init__(self, usr, psw, schl_id, cal_id):
-
         self.user_name = usr
         self.password = psw
         self.school_id = schl_id
-
-        # Load abbreviations/codes for activities
-        if os.path.exists('abbreviations.json'):
-            f = open('abbreviations.json')
+        try:
+            # full_path = os.path.dirname(__file__) 
+            try:
+                f = open(str(self.server_dir) + '/abbreviations.json')
+            except:
+                print("Could not open file 'abbreviations.json'")
             self.codes = json.load(f)
-        else:
-            raise Exception("File 'abbreviations.json' not found :(")
+        except:
+            print("File 'abbreviations.json' not found.")
+            
+        # # Load abbreviations/codes for activities
+        # if os.path.exists('abbreviations.json'):
+        #     f = open('abbreviations.json')
+        #     self.codes = json.load(f)
+        # else:
+        #     raise Exception("File 'abbreviations.json' not found :(")
 
 
         # Define id of target calendar - use 'service.calendarList()' to see all id's
@@ -46,7 +56,8 @@ class lectioToCalendar:
                 self.creds.refresh(Request())
 
             else: #Login if no credentials are found
-                flow = InstalledAppFlow.from_client_secrets_file('credentials.json', self.SCOPES)
+                # cred_file = se
+                flow = InstalledAppFlow.from_client_secrets_file(str(self.server_dir) + '/credentials.json', self.SCOPES)
                 self.creds = flow.run_local_server(port=0)
 
             with open('token.json', 'w') as token:

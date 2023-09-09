@@ -1,7 +1,10 @@
 {
-  "1a DA": "Dansk",
-  "1a EN": "Engelsk",
-  "1a fy": "Fysik",
-  "1a HI": "Historie",
-  "1a Ma": "Matematik"
+  "3a DA": "Dansk",
+  "3a id": "Idræt",
+  "3a MA": "Matematik",
+  "3a MU": "Musik",
+  "3a Pulje": "Pulje",
+  "3g FRB1": "Fransk",
+  "3g If": "Informatik",
+  "3g HI": "Historie"
 }
